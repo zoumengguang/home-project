@@ -4,7 +4,7 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - $(aws ecr get-login-password --no-include-email --region $AWS_DEFAULT_REGION)
       - REPOSITORY_URI=773867802764.dkr.ecr.us-west-2.amazonaws.com/home-project
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG_HAPP=home-project-build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
@@ -17,8 +17,8 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t $REPOSITORY_URI:latest -f ./Dockerfile .
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG_DFLY
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG_DFLY_LATEST
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG_HAPP
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG_HAPP_LATEST
 #      - docker build -t $REPOSITORY_URI:latest -f ./NGINX/Dockerfile .
 #      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG_NGINX
 #      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG_NGINX_LATEST
@@ -29,5 +29,5 @@ phases:
       - echo removing last latest tagged images
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push $REPOSITORY_URI:$IMAGE_TAG_DFLY
-      - docker push $REPOSITORY_URI:$IMAGE_TAG_DFLY_LATEST
+      - docker push $REPOSITORY_URI:$IMAGE_TAG_HAPP
+      - docker push $REPOSITORY_URI:$IMAGE_TAG_HAPP_LATEST

@@ -23,7 +23,6 @@ phases:
 #      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG_NGINX
 #      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG_NGINX_LATEST
 
-
   post_build:
     commands:
       - echo removing last latest tagged images

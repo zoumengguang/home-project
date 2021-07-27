@@ -4,6 +4,6 @@ ENV FLASK_APP="hello"
 
 COPY . .
 RUN pip install -r requirements.txt
-EXPOSE 5000/tcp
-EXPOSE 5000/udp
+EXPOSE 5000
+
 CMD ["python", "hello.py"]

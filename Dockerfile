@@ -4,4 +4,4 @@ ENV FLASK_APP="hello"
 
 COPY . .
 RUN pip install -r requirements.txt
-CMD ["flask", "run"]
+CMD ["python", "hello.py"]

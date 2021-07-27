@@ -3,11 +3,6 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo Activating venv...
-      - . /venv/bin/activate
-      - echo Installing dependencies...
-      - pip install -r requirements.txt
-      - FLASK_APP=hello
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 773867802764.dkr.ecr.us-west-2.amazonaws.com
       - REPOSITORY_URI=773867802764.dkr.ecr.us-west-2.amazonaws.com/home-project
